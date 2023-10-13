@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email_u')->unique();
             $table->string('password');
             $table->string('status')->default('active');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

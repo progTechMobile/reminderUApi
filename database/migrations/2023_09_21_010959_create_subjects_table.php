@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->integer('credits')->nullable();
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('user_id');
             $table->string('code')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
