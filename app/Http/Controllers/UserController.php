@@ -35,7 +35,7 @@ class UserController extends Controller
         $users = new User();
         $users -> name = $request -> name ; 
         $users -> last_name = $request -> last_name ; 
-        $users -> email_u = $request -> email_u ; 
+        $users -> email = $request -> email ; 
         $users -> password = $request -> password ; 
         $users -> status = $request -> status ; 
         $users ->  save();
@@ -68,7 +68,7 @@ class UserController extends Controller
         $users = User::find($id);
         $users -> name = $request -> name ; 
         $users -> last_name = $request -> last_name ; 
-        $users -> email_u = $request -> email_u ; 
+        $users -> email = $request -> email ; 
         $users -> password = $request -> password ; 
         $users -> status = $request -> status ; 
         $users ->  save();
