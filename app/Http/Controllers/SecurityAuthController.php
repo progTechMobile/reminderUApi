@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,4 +48,18 @@ class SecurityAuthController extends Controller
         ], 200);
     }
 
+    public function getRoleNameById(Request $request, $role_id)
+    {
+        $role = Role::find($role_id);
+        return response()->json([
+            'role_name' => $role->name
+        ], 200);
+    
+    }
+    public function roles(Request $request)
+    {
+        $roles = Role::whereNot('status','perpetual')->get();
+        return $roles;
+    
+    }
 }

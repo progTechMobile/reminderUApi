@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\UserType;
 use App\Models\Role;
 use App\Models\User;
 use Exception;
@@ -24,18 +25,16 @@ class InitialConfigProvider extends ServiceProvider
     public function boot(): void
     {
         try {
-            $roleAdmin = Role::where('name', 'admin')->where('status', 'perpetual')->first();
-            if (empty($roleAdmin)) {
-                $roleAdmin = new Role();
-                $roleAdmin->name = 'admin';
-                $roleAdmin->status = 'perpetual';
+            $roleAdmin = Role::firstOrNew(['name' => UserType::Admin, 'status' => 'perpetual']);
+            
+            if (!$roleAdmin->exists) {
                 $roleAdmin->save();
             }
 
             //crear usuario con variables del .env
-            $user = User::where('email', env('ADMIN_EMAIL'))->first();
-            if (empty($user)) {
-                $user = new User();
+            $user = User::firstOrNew(['email' => env('ADMIN_EMAIL')]);
+
+            if (!$user->exists) {
                 $user->name = env('ADMIN_NAME');
                 $user->last_name = env('ADMIN_LAST_NAME');
                 $user->email = env('ADMIN_EMAIL');
@@ -44,7 +43,13 @@ class InitialConfigProvider extends ServiceProvider
                 $user->save();
             }
 
+            $roleStudent = Role::firstOrNew(['name' => UserType::Student, 'status' => 'active']);
+
+            if (!$roleStudent->exists) {
+                $roleStudent->save();
+            }
         } catch (Exception $e) {
+            echo ($e);
             Log::error($e->getMessage());
         }
     }
