@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -32,14 +32,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $users = new User();
-        $users -> name = $request -> name ; 
-        $users -> last_name = $request -> last_name ; 
-        $users -> email = $request -> email ; 
-        $users -> password = $request -> password ; 
-        $users -> status = $request -> status ; 
-        $users ->  save();
-        return $users;
+        $user = new User();
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = $request->role_id;
+        $user->save();
+        return $user;
     }
 
     /**
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         //
-        
+
     }
 
     /**
@@ -66,12 +66,12 @@ class UserController extends Controller
     {
         //
         $users = User::find($id);
-        $users -> name = $request -> name ; 
-        $users -> last_name = $request -> last_name ; 
-        $users -> email = $request -> email ; 
-        $users -> password = $request -> password ; 
-        $users -> status = $request -> status ; 
-        $users ->  save();
+        $users->name = $request->name;
+        $users->last_name = $request->last_name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        $users->status = $request->status;
+        $users->save();
         return $users;
     }
 
@@ -82,7 +82,7 @@ class UserController extends Controller
     {
         //
         $users = User::find($id);
-        $users -> delete();
+        $users->delete();
         return $users;
     }
 }

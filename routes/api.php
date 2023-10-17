@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SecurityAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -54,6 +53,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [SecurityAuthController::class, 'logout']);
 });
 
-Route::post('/login', [SecurityAuthController::class, 'login'])->name('login');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/login', [SecurityAuthController::class, 'login']);
+Route::post('/register', [UserController::class, 'store']);
 Route::get('/roles', [SecurityAuthController::class, 'roles']);
