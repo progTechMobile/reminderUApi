@@ -8,6 +8,7 @@ use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/user', [UserController::class, 'store']);
     Route::put('/user/{$id}', [UserController::class, 'update']);
     Route::delete('/user/{$id}', [UserController::class, 'destroy']);
+    Route::get("/user/{id}", [UsersController::class, 'edit'])->name('user.edit');
 
     Route::get('/teacher', [TeacherController::class, 'index']);
     Route::post('/teacher', [TeacherController::class, 'store']);
     Route::put('/teacher/{$id}', [TeacherController::class, 'update']);
     Route::delete('/teacher/{$id}', [TeacherController::class, 'destroy']);
+    Route::get("/teacher/{id}", [TeacherController::class, 'edit'])->name('teacher.edit');
 
     Route::get('/subjects', [SubjectsController::class, 'index']);
     Route::post('/subjects', [SubjectsController::class, 'store']);
@@ -64,5 +67,4 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         //
         $users = User::all();
-        return $users;
+        return response()->json(['users' => $users]);
     }
 
     /**
@@ -32,14 +32,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $user = new User();
-        $user->name = $request->name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return $user;
+        $users = new User();
+        $users->name = $request->name;
+        $users->last_name = $request->last_name;
+        $users->email = $request->email;
+        $users->password = bcrypt($request->password);
+        $users->role_id = $request->role_id;
+        $users->save();
+        return $users;
     }
 
     /**
@@ -48,6 +48,8 @@ class UserController extends Controller
     public function show(string $id)
     {
         //
+        $users = User::find($id);
+        return response()->json(['user' => $users]);
 
     }
 
@@ -57,6 +59,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         //
+        $users = User::find($id);
+        return response()->json(['user' => $users]);
     }
 
     /**

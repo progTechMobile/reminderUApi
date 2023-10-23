@@ -14,7 +14,7 @@ class RemindersController extends Controller
     {
         //
         $reminders=Reminder::all();
-        return $reminders;
+        return response()->json(['users' => $reminders]);
     }
 
     /**
@@ -50,6 +50,8 @@ class RemindersController extends Controller
     public function show(string $id)
     {
         //
+        $reminders = Reminder::find($id);
+        return response()->json(['users' => $reminders]);
     }
 
     /**
@@ -58,6 +60,8 @@ class RemindersController extends Controller
     public function edit(string $id)
     {
         //
+        $reminders = Reminder::find($id);
+        return response()->json(['users' => $reminders]);
     }
 
     /**

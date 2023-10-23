@@ -13,8 +13,8 @@ class SchedulesController extends Controller
     public function index()
     {
         //
-        $schedule=Schedule::all();
-        return $schedule;
+        $schedules=Schedule::all();
+        return response()->json(['users' => $schedules]);
     }
 
     /**
@@ -31,16 +31,16 @@ class SchedulesController extends Controller
     public function store(Request $request)
     {
         //
-        $schedule =new Schedule();
-        $schedule -> semester = $request -> semester ;
-        $schedule -> day = $request -> day;
-        $schedule -> timestart = $request -> timestar;
-        $schedule -> timeend = $request -> timeend;
-        $schedule -> Subject_id = $request -> subject_id;
-        $schedule -> block = $request ->block ;
-        $schedule -> classroom = $request -> classroom;
-        $schedule -> save() ;
-        return $schedule;
+        $schedules =new Schedule();
+        $schedules -> semester = $request -> semester ;
+        $schedules -> day = $request -> day;
+        $schedules -> timestart = $request -> timestar;
+        $schedules -> timeend = $request -> timeend;
+        $schedules -> Subject_id = $request -> subject_id;
+        $schedules -> block = $request ->block ;
+        $schedules -> classroom = $request -> classroom;
+        $schedules -> save() ;
+        return $schedules;
     }
 
     /**
@@ -49,6 +49,8 @@ class SchedulesController extends Controller
     public function show(string $id)
     {
         //
+        $schedules = Schedule::find($id);
+        return response()->json(['users' => $schedules]); 
     }
 
     /**
@@ -57,6 +59,8 @@ class SchedulesController extends Controller
     public function edit(string $id)
     {
         //
+        $schedules = Schedule::find($id);
+        return response()->json(['users' => $schedules]);
     }
 
     /**
@@ -65,16 +69,16 @@ class SchedulesController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $schedule = Schedule::find($id);
-        $schedule -> semester = $request -> semester ;
-        $schedule -> day = $request -> day;
-        $schedule -> timestart = $request -> timestar;
-        $schedule -> timeend = $request -> timeend;
-        $schedule -> Subject_id = $request -> subject_id;
-        $schedule -> block = $request ->block ;
-        $schedule -> classroom = $request -> classroom;
-        $schedule -> save() ;
-        return $schedule;
+        $schedules = Schedule::find($id);
+        $schedules -> semester = $request -> semester ;
+        $schedules -> day = $request -> day;
+        $schedules -> timestart = $request -> timestar;
+        $schedules -> timeend = $request -> timeend;
+        $schedules -> Subject_id = $request -> subject_id;
+        $schedules -> block = $request ->block ;
+        $schedules -> classroom = $request -> classroom;
+        $schedules -> save() ;
+        return $schedules;
     }
 
     /**
@@ -83,8 +87,8 @@ class SchedulesController extends Controller
     public function destroy(string $id)
     {
         //
-        $schedule = Schedule::find($id);
-        $schedule -> delete();
-        return $schedule;
+        $schedules = Schedule::find($id);
+        $schedules -> delete();
+        return $schedules;
     }
 }

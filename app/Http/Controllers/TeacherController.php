@@ -14,7 +14,7 @@ class TeacherController extends Controller
     {
         //
         $teach = TeacherRating::all();
-        return $teach;
+        return response()->json(['users' => $teach]);
     }
 
     /**
@@ -47,6 +47,8 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         //
+        $teach = TeacherRating::find($id);
+        return response()->json(['users' => $teach]);
     }
 
     /**
@@ -55,6 +57,8 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         //
+        $teach = TeacherRating::find($id);
+        return response()->json(['users' => $teach]);
     }
 
     /**

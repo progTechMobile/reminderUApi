@@ -13,8 +13,8 @@ class ScoresController extends Controller
     public function index()
     {
         //
-        $score =Score::all();
-        return $score;
+        $scores =Score::all();
+        return response()->json(['users' => $scores]);
 
     }
 
@@ -32,16 +32,16 @@ class ScoresController extends Controller
     public function store(Request $request)
     {
         //
-        $score =new Score();
-        $score -> subject_id = $request -> subject_id ;
-        $score -> score = $request -> score;
-        $score -> percent = $request -> percent;
-        $score -> date = $request -> date;
-        $score -> description = $request -> description;
-        $score -> status = $request ->status ;
-        $score -> user_id = $request -> user_id;
-        $score -> save() ;
-        return $score;
+        $scores =new Score();
+        $scores -> subject_id = $request -> subject_id ;
+        $scores -> score = $request -> score;
+        $scores -> percent = $request -> percent;
+        $scores -> date = $request -> date;
+        $scores -> description = $request -> description;
+        $scores -> status = $request ->status ;
+        $scores -> user_id = $request -> user_id;
+        $scores -> save() ;
+        return $scores;
     }
 
     /**
@@ -50,6 +50,9 @@ class ScoresController extends Controller
     public function show(string $id)
     {
         //
+        $scores = Score::find($id);
+        return response()->json(['users' => $scores]);
+        
     }
 
     /**
@@ -58,6 +61,8 @@ class ScoresController extends Controller
     public function edit(string $id)
     {
         //
+        $scores = Score::find($id);
+        return response()->json(['users' => $scores]);
     }
 
     /**

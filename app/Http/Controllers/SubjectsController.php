@@ -13,8 +13,8 @@ class SubjectsController extends Controller
     public function index()
     {
         //
-        $subjets = Subject::all();
-        return $subjets;
+        $subjects = Subject::all();
+        return response()->json(['users' => $subjects]);
     }
 
     /**
@@ -47,6 +47,8 @@ class SubjectsController extends Controller
     public function show(string $id)
     {
         //
+        $subjects = Subject::find($id);
+        return response()->json(['users' => $subjects]);
     }
 
     /**
@@ -55,6 +57,8 @@ class SubjectsController extends Controller
     public function edit(string $id)
     {
         //
+        $subjects = Subject::find($id);
+        return response()->json(['users' => $subjects]);
     }
 
     /**
