@@ -56,3 +56,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::post('/login', [SecurityAuthController::class, 'login']);
 Route::post('/register', [UserController::class, 'store']);
 Route::get('/roles', [SecurityAuthController::class, 'roles']);
+

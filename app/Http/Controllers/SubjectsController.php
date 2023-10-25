@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
+use App\Models\User;
 
 class SubjectsController extends Controller
 {
@@ -20,11 +21,16 @@ class SubjectsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function ShowSubjectsUserId(string $id )
     {
-        //
-    }
+        $SubjectsUsuario= User:: find ($id);
+        if (!$SubjectsUsuario){
+            return response()->json(['message' => 'No existe el usuario'], 404);
+        }
+        $Subjects= $SubjectsUsuario -> Subjects ;
+        return response()->json(['users' => $Subjects]);
 
+    }
     /**
      * Store a newly created resource in storage.
      */

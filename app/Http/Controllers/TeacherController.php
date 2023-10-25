@@ -33,7 +33,7 @@ class TeacherController extends Controller
         //
         $teach = new TeacherRating();
         $teach -> full_name =$request -> full_name ;
-        $teach -> obsaervation =$request ->observation ;
+        $teach -> observation =$request ->observation ;
         $teach -> score =$request -> score ;
         $teach -> subject_id =$request -> subject_id;
         $teach -> email =$request -> email ;
@@ -69,7 +69,7 @@ class TeacherController extends Controller
         //
         $teach=TeacherRating::find($id);
         $teach -> full_name =$request -> full_name ;
-        $teach -> obsaervation =$request ->observation ;
+        $teach -> observation =$request ->observation ;
         $teach -> score =$request -> score ;
         $teach -> subject_id =$request -> subject_id;
         $teach -> email =$request -> email ;

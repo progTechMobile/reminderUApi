@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reminder;
+use App\Models\User;
 
 class RemindersController extends Controller
 {
@@ -20,9 +21,15 @@ class RemindersController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function ShowRemainderUserId(string $id )
     {
-        //
+        $reminderUsuario= User:: find ($id);
+        if (!$reminderUsuario){
+            return response()->json(['message' => 'No existe el usuario'], 404);
+        }
+        $reminders= $reminderUsuario -> reminders ;
+        return response()->json(['users' => $reminder]);
+
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\User;
 
 class SchedulesController extends Controller
 {
@@ -20,11 +21,16 @@ class SchedulesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function ShowSchedulesUserId(string $id )
     {
-        //
-    }
+        $SchedulesUsuario= User:: find ($id);
+        if (!$SchedulesUsuario){
+            return response()->json(['message' => 'No existe el usuario'], 404);
+        }
+        $Schedules= $SchedulesUsuario -> Schedules ;
+        return response()->json(['users' => $Schedules]);
 
+    }
     /**
      * Store a newly created resource in storage.
      */

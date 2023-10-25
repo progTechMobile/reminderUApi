@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Score;
+use App\Models\User;
 
 class ScoresController extends Controller
 {
@@ -21,11 +22,16 @@ class ScoresController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function ShowScoreUserId(string $id )
     {
-        //
-    }
+        $ScoresUsuario= User:: find ($id);
+        if (!$ScoresUsuario){
+            return response()->json(['message' => 'No existe el usuario'], 404);
+        }
+        $Scores= $ScoresUsuario -> Scores ;
+        return response()->json(['users' => $Scores]);
 
+    }
     /**
      * Store a newly created resource in storage.
      */
