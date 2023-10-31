@@ -23,7 +23,8 @@ class SecurityAuthController extends Controller
         if (!Auth::attempt($credentials)) {
             // Retornamos un mensaje de error
             return response()->json([
-                'token' => null
+                'token' => null,
+                'user' => null,
             ], 401);
         }
         // Si las credenciales son correctas, generamos un token para el usuario
@@ -31,7 +32,8 @@ class SecurityAuthController extends Controller
         $token = $user->createToken('authToken')->plainTextToken;
         // Retornamos solo el token en formato de texto plano
         return response()->json([
-            'token' => $token
+            'token' => $token,
+            'user' => $user
         ], 200);
     }
 

@@ -28,7 +28,7 @@ class RemindersController extends Controller
             return response()->json(['message' => 'No existe el usuario'], 404);
         }
         $reminders= $reminderUsuario -> reminders ;
-        return response()->json(['users' => $reminder]);
+        return response()->json(['users' => $reminders]);
 
     }
 
