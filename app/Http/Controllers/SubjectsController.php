@@ -15,7 +15,13 @@ class SubjectsController extends Controller
     {
         //
         $subjects = Subject::all();
-        return response()->json(['users' => $subjects]);
+        return response()->json($subjects);
+    }
+    public function subjectsByUserId($id)
+    {
+        //
+        $subjects = Subject::where('user_id', $id)->get();
+        return $subjects;
     }
 
     /**

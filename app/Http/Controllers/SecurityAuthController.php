@@ -46,6 +46,7 @@ class SecurityAuthController extends Controller
 
         // Retornar una respuesta exitosa
         return response()->json([
+            'ok'=>true,
             'message' => 'Sesión cerrada exitosamente'
         ], 200);
     }

@@ -32,9 +32,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/teacher/{$id}', [TeacherController::class, 'destroy']);
 
     Route::get('/subjects', [SubjectsController::class, 'index']);
+    Route::get('/subjectsByUserId/{id}', [SubjectsController::class, 'subjectsByUserId']);
     Route::post('/subjects', [SubjectsController::class, 'store']);
-    Route::put('/subjects/{$id}', [SubjectsController::class, 'update']);
-    Route::delete('/subjects/{$id}', [SubjectsController::class, 'destroy']);
+    Route::put('/subjects/{id}', [SubjectsController::class, 'update']);
+    Route::delete('/subjects/{id}', [SubjectsController::class, 'destroy']);
 
     Route::get('/scores', [ScoresController::class, 'index']);
     Route::post('/scores', [ScoresController::class, 'store']);
