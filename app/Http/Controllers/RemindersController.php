@@ -14,20 +14,26 @@ class RemindersController extends Controller
     public function index()
     {
         //
-        $reminders=Reminder::all();
+        $reminders = Reminder::all();
         return response()->json(['users' => $reminders]);
+    }
+    public function remindersByUserId($id)
+    {
+        //
+        $reminders = Reminder::where('user_id', $id)->get();
+        return $reminders;
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function ShowRemainderUserId(string $id )
+    public function ShowRemainderUserId(string $id)
     {
-        $reminderUsuario= User:: find ($id);
-        if (!$reminderUsuario){
+        $reminderUsuario = User::find($id);
+        if (!$reminderUsuario) {
             return response()->json(['message' => 'No existe el usuario'], 404);
         }
-        $reminders= $reminderUsuario -> reminders ;
+        $reminders = $reminderUsuario->reminders;
         return response()->json(['users' => $reminders]);
 
     }
@@ -38,16 +44,16 @@ class RemindersController extends Controller
     public function store(Request $request)
     {
         //
-        $reminders=new Reminder();
-        $reminders -> name =$request -> name ;
-        $reminders -> description =$request ->description ;
-        $reminders -> creation_date =$request ->creation_date ;
-        $reminders -> notification_date =$request ->notification_date ;
-        $reminders -> type =$request ->type ;
-        $reminders -> status =$request ->status ;
-        $reminders -> subject_id =$request ->subject_id ;
-        $reminders -> user_id =$request ->user_id ;
-        $reminders -> save ();
+        $reminders = new Reminder();
+        $reminders->name = $request->name;
+        $reminders->description = $request->description;
+        $reminders->creation_date = date('Y-m-d H:i:s', strtotime($request->creation_date));
+        $reminders->notification_date = date('Y-m-d H:i:s', strtotime($request->notification_date));
+        $reminders->type = $request->type;
+        $reminders->status = $request->status;
+        $reminders->subject_id = $request->subject_id;
+        $reminders->user_id = $request->user_id;
+        $reminders->save();
         return $reminders;
     }
 
@@ -78,15 +84,15 @@ class RemindersController extends Controller
     {
         //
         $reminders = Reminder::find($id);
-        $reminders -> name =$request -> name ;
-        $reminders -> description =$request ->description ;
-        $reminders -> creation_date =$request ->creation_date ;
-        $reminders -> notification_date =$request ->notification_date ;
-        $reminders -> type =$request ->type ;
-        $reminders -> status =$request ->status ;
-        $reminders -> subject_id =$request ->subject_id ;
-        $reminders -> user_id =$request ->user_id ;
-        $reminders -> save ();
+        $reminders->name = $request->name;
+        $reminders->description = $request->description;
+        $reminders->creation_date = $request->creation_date;
+        $reminders->notification_date = $request->notification_date;
+        $reminders->type = $request->type;
+        $reminders->status = $request->status;
+        $reminders->subject_id = $request->subject_id;
+        $reminders->user_id = $request->user_id;
+        $reminders->save();
         return $reminders;
     }
 
@@ -97,7 +103,7 @@ class RemindersController extends Controller
     {
         //
         $reminders = Reminder::find($id);
-        $reminders -> delete();
+        $reminders->delete();
         return $reminders;
     }
 }
