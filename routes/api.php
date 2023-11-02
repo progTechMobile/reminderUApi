@@ -38,6 +38,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/subjects/{id}', [SubjectsController::class, 'destroy']);
 
     Route::get('/scores', [ScoresController::class, 'index']);
+    Route::get('/scoresByUserIdAndSubjectId/{user_id}/{subject_id}', [ScoresController::class, 'scoresByUserIdAndSubjectId']);
+    Route::get('/scoresBySubjectId/{subject_id}', [ScoresController::class, 'scoresBySubjectId']);
     Route::post('/scores', [ScoresController::class, 'store']);
     Route::put('/scores/{id}', [ScoresController::class, 'update']);
     Route::delete('/scores/{id}', [ScoresController::class, 'destroy']);

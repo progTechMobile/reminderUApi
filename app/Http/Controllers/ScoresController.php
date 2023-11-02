@@ -19,6 +19,19 @@ class ScoresController extends Controller
 
     }
 
+    public function scoresByUserIdAndSubjectId($user_id, $subject_id)
+    {
+        //
+        $scores = Score::where('user_id', $user_id)->where('subject_id',$subject_id)->get();
+        return $scores;
+    }
+    public function scoresBySubjectId($subject_id)
+    {
+        //
+        $scores = Score::where('subject_id',$subject_id)->get();
+        return $scores;
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -42,7 +55,7 @@ class ScoresController extends Controller
         $scores -> subject_id = $request -> subject_id ;
         $scores -> score = $request -> score;
         $scores -> percent = $request -> percent;
-        $scores -> date = $request -> date;
+        $scores -> date = date('Y-m-d H:i:s', strtotime($request -> date));
         $scores -> description = $request -> description;
         $scores -> status = $request ->status ;
         $scores -> user_id = $request -> user_id;
