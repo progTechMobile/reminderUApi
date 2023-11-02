@@ -17,6 +17,12 @@ class SchedulesController extends Controller
         $schedules=Schedule::all();
         return response()->json(['users' => $schedules]);
     }
+    public function schedulesBySubjectId($id)
+    {
+        //
+        $schedules=Schedule::where('subject_id',$id)->get();
+        return $schedules;
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,8 +46,8 @@ class SchedulesController extends Controller
         $schedules =new Schedule();
         $schedules -> semester = $request -> semester ;
         $schedules -> day = $request -> day;
-        $schedules -> timestart = $request -> timestar;
-        $schedules -> timeend = $request -> timeend;
+        $schedules -> timestart = date('H:i:s', strtotime($request -> timestart));
+        $schedules -> timeend = date('H:i:s', strtotime($request -> timeend));
         $schedules -> Subject_id = $request -> subject_id;
         $schedules -> block = $request ->block ;
         $schedules -> classroom = $request -> classroom;

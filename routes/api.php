@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/scores/{id}', [ScoresController::class, 'destroy']);
 
     Route::get('/schedules', [SchedulesController::class, 'index']);
+    Route::get('/schedulesBySubjectId/{id}', [SchedulesController::class, 'schedulesBySubjectId']);
     Route::post('/schedules', [SchedulesController::class, 'store']);
     Route::put('/schedules/{id}', [SchedulesController::class, 'update']);
     Route::delete('/schedules/{id}', [SchedulesController::class, 'destroy']);
