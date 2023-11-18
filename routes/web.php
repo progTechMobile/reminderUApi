@@ -28,15 +28,16 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::post('/user', [UserController::class, 'store']);
-    Route::put('/user/{$id}', [UserController::class, 'update']);
-    Route::delete('/user/{$id}', [UserController::class, 'destroy']);
-    Route::get("/user/{id}", [UsersController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{id}', [UserController::class, 'update']);
+    Route::delete('/user/{id}', [UserController::class, 'destroy']);
+    Route::get('/user/{id}/edit', [UserController::class, 'edit']);
+    Route::get('/user/pdf', [UserController::class, 'createPDF']);
+
 
     Route::get('/teacher', [TeacherController::class, 'index']);
     Route::post('/teacher', [TeacherController::class, 'store']);
     Route::put('/teacher/{$id}', [TeacherController::class, 'update']);
     Route::delete('/teacher/{$id}', [TeacherController::class, 'destroy']);
-    Route::get("/teacher/{id}", [TeacherController::class, 'edit'])->name('teacher.edit');
 
     Route::get('/subjects', [SubjectsController::class, 'index']);
     Route::post('/subjects', [SubjectsController::class, 'store']);

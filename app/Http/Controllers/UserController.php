@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Role;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 class UserController extends Controller
 {
 
@@ -15,7 +18,8 @@ class UserController extends Controller
     {
         //
         $users = User::all();
-        return response()->json(['users' => $users]);
+        $roles = Role::all();
+        return view("users.index", ["users" => $users, "roles" => $roles]);
     }
 
     /**
@@ -39,7 +43,7 @@ class UserController extends Controller
         $users->password = bcrypt($request->password);
         $users->role_id = $request->role_id;
         $users->save();
-        return $users;
+        return view("users.store", ["users" => $users]);
     }
 
     /**
@@ -59,8 +63,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         //
-        $users = User::find($id);
-        return response()->json(['user' => $users]);
+        $user = User::find($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -73,10 +77,10 @@ class UserController extends Controller
         $users->name = $request->name;
         $users->last_name = $request->last_name;
         $users->email = $request->email;
-        $users->password = $request->password;
+        $users->password = bcrypt($request->password);
         $users->status = $request->status;
         $users->save();
-        return $users;
+        return redirect('/user')->with('success', 'Usuario actualizado correctamente');
     }
 
     /**
@@ -89,4 +93,12 @@ class UserController extends Controller
         $users->delete();
         return $users;
     }
+
+    public function createPDF(){
+        //Recuperar todos los productos de la db
+        $datos = User::all();
+        $pdf = PDF::loadView('PDF.UsersPDF', compact('datos'));
+        return $pdf->download('Lista de Usuarios.pdf');
+    }
+
 }
