@@ -44,6 +44,8 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                            <a href="{{ url('/home') }}" class="btn btn-secondary">Volver al Home</a>
+                            
                         </form>
                     </div>
                 </div>

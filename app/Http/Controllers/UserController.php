@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Role;
-use App\Exports\UsersExport;
-use Maatwebsite\Excel\Facades\Excel;
 class UserController extends Controller
 {
 
@@ -43,7 +41,7 @@ class UserController extends Controller
         $users->password = bcrypt($request->password);
         $users->role_id = $request->role_id;
         $users->save();
-        return view("users.store", ["users" => $users]);
+        return redirect('/user')->with('success', 'Usuario creado correctamente');
     }
 
     /**
