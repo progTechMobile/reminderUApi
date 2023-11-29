@@ -35,13 +35,14 @@ class UserController extends Controller
     {
         //
         $users = new User();
+        $roles = Role::all();
         $users->name = $request->name;
         $users->last_name = $request->last_name;
         $users->email = $request->email;
         $users->password = bcrypt($request->password);
         $users->role_id = $request->role_id;
         $users->save();
-        return redirect('/user')->with('success', 'Usuario creado correctamente');
+        return view("users.store",[ "roles" => $roles]);
     }
 
     /**

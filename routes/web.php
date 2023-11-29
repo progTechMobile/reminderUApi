@@ -27,7 +27,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index']);
-    Route::post('/user', [UserController::class, 'store']);
+    Route::get('/users', [UserController::class, 'store']);
+    Route::post('/users', [UserController::class, 'store']);
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
     Route::get('/user/{id}/edit', [UserController::class, 'edit']);

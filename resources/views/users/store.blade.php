@@ -10,7 +10,7 @@
                     <div class="card-header">{{ __('Crear Usuario') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ url('/user')  }}">
+                        <form method="POST" action="{{ url('/users')  }}">
                             @csrf
 
                             <div class="form-group">
